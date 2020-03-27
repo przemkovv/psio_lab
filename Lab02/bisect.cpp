@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-const float epsilon = 0.0000001f;
+const float epsilon = 0.00001f;
 const int max_iterations = 10000;
 
 
@@ -31,7 +31,9 @@ float g(float x) {
 }
 
 
-std::optional<float> bisect(float begin, float end, float (*func)(float)) {
+template <typename Func>
+std::optional<float> bisect(float begin, float end, Func func) {
+//std::optional<float> bisect(float begin, float end, float (*func)(float)) {
 
 	float begin_value = func(begin);
 	float end_value = func(end);
@@ -81,10 +83,33 @@ void test_bisect() {
 		}
 	}
 	{
-		std::optional<float> zero_point = bisect(-3,	 2, f);
+		std::optional<float> zero_point = bisect(-3, 2, f);
 		if (zero_point)
 		{
 			std::cout << "Miejsce zerowe funkcji f w (-3..2) = " << zero_point.value() << '\n';
+		}
+		else
+		{
+			std::cout << "Nie wiemy czy jest tam miejsce zerowe\n";
+		}
+	}
+
+	{
+		//auto sin = [](float x)
+		//{
+		//	return std::sin(x);
+		//};
+		int counter = 0;
+		std::optional<float> zero_point = bisect(-1, 2,
+		                                         [counter](float x)
+		                                         {
+			                                         ;
+			                                         return std::sin(x+counter);
+		                                         });
+		std::cout << "Liczba wywolan funkcji: " << counter << '\n';
+		if (zero_point)
+		{
+			std::cout << "Miejsce zerowe funkcji sin w (-3..3) = " << zero_point.value() << '\n';
 		}
 		else
 		{
