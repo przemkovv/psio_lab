@@ -4,6 +4,8 @@
 
 #include <algorithm>
 #include <iostream>
+#include <map>
+#include <regex>
 #include <vector>
 
 enum Color1
@@ -54,8 +56,7 @@ std::ostream& operator<<(std::ostream& out, const std::vector<int>& vec) {
 }
 
 
-int main() {
-
+void test_lambda() {
 	Color1 c1 = Red;
 	Color2 c2 = Black;
 
@@ -101,21 +102,116 @@ int main() {
 	std::vector<Sword> swordImperial2;
 	std::transform(swords.begin(), swords.end(), std::back_inserter(swordImperial2), metric_to_imperial);
 	print(swordImperial2);
+	std::map<std::string, int> word_statistics;
+	word_statistics.emplace(std::pair{"the", 1});
+}
+
+struct CurrencyRate
+{
+	std::string name = "";
+	float value = 0.0f;
+	std::string date = "";
+};
+
+void print(const std::vector<CurrencyRate>& rates, const std::string& description) {
+
+	std::cout << description << '\n';
+	for (const CurrencyRate& rate : rates)
+	{
+		std::cout << rate.name << " rate at the day " << rate.date << " was " << rate.value << '\n';
+	}
+	std::cout << "-----------------------------\n";
+}
+
+void print(const std::vector<CurrencyRate>::const_iterator begin,
+           const std::vector<CurrencyRate>::const_iterator end,
+           const std::string& description) {
+
+	std::cout << description << '\n';
+	for (auto it = begin; it != end; ++it)
+	{
+		const CurrencyRate& rate = *it;
+		std::cout << rate.name << " rate at the day " << rate.date << " was " << rate.value << '\n';
+	}
+	std::cout << "-----------------------------\n";
+}
+
+bool operator<(const CurrencyRate& rate1, const CurrencyRate& rate2) {
+	return std::tie(rate1.name, rate1.value, rate1.date) <
+		std::tie(rate2.name, rate2.value, rate2.date);
+}
 
 
-	std::vector<int> v{1, 2, 3, 4, 5};
-	std::vector<int> v{1, 2, 3, 3, 3, 3, 4, 5};
-	std::cout << v;
+void test_zadanie_10() {
+
+	std::vector<CurrencyRate> currencyRates{
+		{"USD", 4.5f, "2020-04-03"},
+		{"USD", 4.51f, "2020-04-04"},
+		{"USD", 4.51f, "2020-04-05"},
+		{"USD", 4.49f, "2020-04-06"},
+		{"USD", 4.34f, "2020-04-07"},
+		{"USD", 4.34f, "2020-04-08"},
+		{"USD", 4.51f, "2020-04-09"},
+		{"EUR", 3.5f, "2020-04-03"},
+		{"EUR", 3.51f, "2020-04-04"},
+		{"EUR", 3.51f, "2020-04-05"},
+		{"EUR", 5.49f, "2020-04-06"},
+		{"EUR", 3.34f, "2020-04-07"},
+		{"EUR", 3.34f, "2020-04-08"},
+		{"EUR", 3.51f, "2020-04-09"},
+	};
+	std::vector<CurrencyRate> currencyRatesUSD;
+	std::vector<CurrencyRate> currencyRatesEURO;
+
+
+	std::copy_if(currencyRates.cbegin(), currencyRates.cend(),
+	             std::back_inserter(currencyRatesUSD),
+	             [](const CurrencyRate& rate)
+	             {
+		             return rate.name == "USD";
+	             }
+	);
+	std::copy_if(currencyRates.cbegin(), currencyRates.cend(),
+	             std::back_inserter(currencyRatesEURO),
+	             [](const CurrencyRate& rate)
+	             {
+		             return rate.name == "EUR";
+	             }
+	);
+
+	print(currencyRates, "ALL");
+	print(currencyRatesUSD, "USD");
+	print(currencyRatesEURO, "EUR");
+
+	auto compareRates = [](const CurrencyRate& rate1, const CurrencyRate& rate2)
+	{
+		return rate1.value < rate2.value;
+	};
+	std::sort(currencyRatesUSD.begin(), currencyRatesUSD.end(), compareRates);
+	std::sort(currencyRatesEURO.begin(), currencyRatesEURO.end(), compareRates);
+
+	print(currencyRatesUSD, "USD Sorted");
+
+	auto [firstIt, endIt] = std::equal_range(currencyRatesUSD.cbegin(), currencyRatesUSD.cend(),
+	                                         CurrencyRate{"USD", 4.51f}, compareRates);
+
+	print(firstIt, endIt, "USD = 4.51");
+
+
+	std::sort(currencyRates.begin(), currencyRates.end(), compareRates);
+	print(currencyRates, "ALL sorted");
+	std::sort(currencyRates.begin(), currencyRates.end());
+	print(currencyRates, "ALL sorted second try");
+
 
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+int main() {
+
+
+	//test_lambda();
+	test_zadanie_10();
+
+
+}
