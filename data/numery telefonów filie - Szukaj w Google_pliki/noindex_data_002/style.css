@@ -1,0 +1,252 @@
+html, body, div, span,
+p, blockquote, pre, code,
+ul, ol, li,
+h1, h2, h3, h4, h5, h6,
+form, fieldset, legend, label, input, textarea,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  border: 0;
+}
+
+
+/**************/
+/* TYPOGRAPHY */
+/**************/
+
+body {
+  background: #FFF;
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;     /* web safe fonts */
+  font-size: 75%;    /* 12px */
+  font-weight: normal;
+  line-height: 160%;    /* 19.2px */
+}
+
+h1 {
+  font-size: 2.5em;
+  font-weight: normal;
+}
+
+h2 {
+  font-size: 1.75em;
+  font-weight: normal;
+}
+
+
+/*****************/
+/* DEFAULT LINKS */
+/*****************/
+
+a {
+  color: #27638C;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+a:link,
+a:visited {
+  color: #27638C;
+}  
+
+a:hover,
+a:active {
+  text-decoration: underline;
+}
+
+
+/**********/
+/* LAYOUT */
+/**********/
+
+html {
+  background: #f3f3f4;
+  color: #666;
+}
+
+#page {
+  background-color: #f3f3f4;
+  margin: 0;
+  width: 100%;
+  float: left;
+}
+
+p {
+  font-size: 1em;
+  font-weight: normal;
+  line-height: 160%;
+  margin: 10px 0;
+}
+
+
+/******************/
+/* HEADER REGIONS */
+/******************/
+
+#header {
+  background-color: #fff;
+  min-HEIGHT: 105px;
+  PADDING-TOP: 5px;
+}
+
+#header-wrapper {
+  background: #fff url("../images/upper_back.jpg") no-repeat right 0px;
+  margin: 0px auto;
+  padding-top: 0px;
+  width: 960px;
+}
+
+#header #logo {
+  float: left;
+  margin: 0 14px 0 0;
+}
+
+/********************************/
+/* PREFACE REGIONS */
+/********************************/
+
+#preface {
+  background: #144A6E url("../images/preface-wrapper-bg.png") repeat-x top;
+  min-height: 24px;
+  height: 24px;
+  vertical-align: top;
+  display: table;
+  width: 100%;
+  margin-top: -19px;
+}
+
+/************************/
+/*  MAIN AREA WRAPPER   */
+/* (Sidebars + Content) */
+/************************/
+
+#main {
+ background:url("../images/content-gradient.png") repeat-x scroll 0 1px #F3F3F4;
+}
+
+#main-wrapper {
+  background: url("../images/back-main.png") no-repeat scroll right 36px transparent;
+  margin: 0 auto;
+  width: 960px;
+}
+
+#main-wrapper a.active {
+  color: #144A6E;
+  text-decoration: underline;
+}
+
+
+/*******************/
+/* CONTENT REGIONS */
+/*******************/
+
+#content-wrapper {
+  float: left;
+  WIDTH: 100%;
+  padding-top: 15px;
+  min-height: 350px;
+}
+
+#content {
+  margin: 0 0 0 0px; 
+}
+
+/**********************************/
+/* POSTSCRIPT REGIONS  */
+/**********************************/
+
+#postscript-wrapper {
+  clear: both;
+  margin: 0 auto;
+  width: 960px;
+}
+
+/*****************/
+/* FOOTER REGION */
+/*****************/
+
+#footer {
+  background: transparent url("../images/lower_back.jpg") no-repeat top center;
+  clear: both;
+  display: block;
+  font-size: 0.9em;
+  margin: auto;
+  overflow: hidden;
+  padding: 0px 0;
+  text-align: center;
+  width: 960px;
+  min-height: 244px;
+}
+
+#legal-notice {
+  background: #f3f3f4;
+  clear: both;
+  color: #AAA;
+  display: block;
+  font-size: 0.9em;
+  padding: 0px 0;
+  text-align: center;
+  width: 100%;
+}
+
+#legal-notice a {
+  color: #6699CC;
+}
+
+/******************/
+/* HELPER CLASSES */
+/******************/
+
+.hide {
+  display: none;
+  visibility: hidden;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.clear { 
+  clear: both;
+}
+
+
+.clearfix:after {  
+  clear: both;
+  content: "."; 
+  display: block;
+  font-size: 0;
+  height: 0; 
+  visibility: hidden;
+}
+
+
+/************/
+/* HEADINGS */
+/************/
+
+h1.title {  
+  border-bottom: 1px solid #ddd;
+  clear: left;
+  font-family: Myriad Pro, Myriad Web Pro Regular, Lucida Grande, Geneva, Trebuchet MS, sans-serif;
+  font-size: 1.833em;
+  font-weight: 600;
+  line-height: 1.272em;
+  letter-spacing: -1px;
+  word-spacing: 2px;
+  margin-bottom: 10px;
+}  
+
+h2.title {     
+  font-family: Myriad Pro, Myriad Web Pro Regular, Lucida Grande, Geneva, Trebuchet MS, sans-serif;
+  font-size: 1.333em;
+  font-weight: 600;
+  text-transform: uppercase;
+}  

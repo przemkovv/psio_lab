@@ -112,7 +112,6 @@ struct CurrencyRate
 	float value = 0.0f;
 	std::string date = "";
 };
-
 void print(const std::vector<CurrencyRate>& rates, const std::string& description) {
 
 	std::cout << description << '\n';
